@@ -1,0 +1,71 @@
+# The lines below are called `modelines`. See `:help modeline`
+# Feel free to remove those if you don't want/need to use them.
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj
+
+version: 1
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    binary: co2monitor
+    goos:
+      - linux
+    flags:
+      - "-trimpath"
+    goarm:
+      - "7"
+    goarch:
+      - amd64
+      - arm
+      - arm64
+dockers:
+  - image_templates:
+      - "ghcr.io/schjan/co2monitor:{{ .Tag }}-amd64"
+    use: buildx
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - "--platform=linux/amd64"
+  - image_templates:
+      - "ghcr.io/schjan/co2monitor:{{ .Tag }}-arm"
+    use: buildx
+    goarch: arm
+    goarm: "7"
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - "--platform=linux/arm/v7"
+  - image_templates:
+      - "ghcr.io/schjan/co2monitor:{{ .Tag }}-arm64v8"
+    use: buildx
+    goarch: arm64
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - "--platform=linux/arm64/v8"
+docker_manifests:
+  - name_template: "ghcr.io/schjan/co2monitor:{{ .Tag }}"
+    image_templates:
+      - "ghcr.io/schjan/co2monitor:{{ .Tag }}-amd64"
+      - "ghcr.io/schjan/co2monitor:{{ .Tag }}-arm64v8"
+      - "ghcr.io/schjan/co2monitor:{{ .Tag }}-arm"
+
+archives:
+  - format: tar.gz
+    # this name template makes the OS and Arch compatible with the results of `uname`.
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"

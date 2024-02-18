@@ -7,3 +7,10 @@ updates:
     open-pull-requests-limit: 10
     reviewers:
       - schjan
+  - package-ecosystem: "github-actions"
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 10
+    reviewers:
+      - schjan

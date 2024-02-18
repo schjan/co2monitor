@@ -1,12 +1,10 @@
 // These are in fact integration tests. You will need a CO2 meter to run them ¯\_(ツ)_/¯
-package meter_test
+package meter
 
 import (
 	"testing"
 
 	"log"
-
-	. "github.com/larsp/co2monitor/meter"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

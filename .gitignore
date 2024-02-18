@@ -16,3 +16,5 @@
 .idea/
 co2monitor
 vendor/
+
+dist/
