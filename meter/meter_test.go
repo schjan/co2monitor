@@ -6,8 +6,6 @@ import (
 
 	"log"
 
-	. "github.com/larsp/co2monitor/meter"
-
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

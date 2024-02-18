@@ -1,4 +1,4 @@
-module github.com/larsp/co2monitor
+module github.com/schjan/co2monitor
 
 go 1.22
 
