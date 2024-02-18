@@ -5,22 +5,24 @@ go 1.22
 toolchain go1.22.0
 
 require (
-	github.com/pkg/errors v0.8.0
-	github.com/prometheus/client_golang v0.8.0
-	github.com/stretchr/testify v1.2.0
-	gopkg.in/alecthomas/kingpin.v2 v2.2.6
+	github.com/alecthomas/kingpin/v2 v2.4.0
+	github.com/pkg/errors v0.9.1
+	github.com/prometheus/client_golang v1.18.0
+	github.com/stretchr/testify v1.8.4
 )
 
 require (
-	github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc // indirect
-	github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf // indirect
-	github.com/beorn7/perks v0.0.0-20160804104726-4c0e84591b9a // indirect
-	github.com/davecgh/go-spew v1.1.0 // indirect
-	github.com/golang/protobuf v0.0.0-20171113180720-1e59b77b52bf // indirect
-	github.com/matttproud/golang_protobuf_extensions v1.0.0 // indirect
+	github.com/alecthomas/units v0.0.0-20231202071711-9a357b53e9c9 // indirect
+	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/cespare/xxhash/v2 v2.2.0 // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/kr/text v0.2.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/prometheus/client_model v0.0.0-20171117100541-99fa1f4be8e5 // indirect
-	github.com/prometheus/common v0.0.0-20180110214958-89604d197083 // indirect
-	github.com/prometheus/procfs v0.0.0-20171226183907-b15cd069a834 // indirect
-	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
+	github.com/prometheus/client_model v0.6.0 // indirect
+	github.com/prometheus/common v0.47.0 // indirect
+	github.com/prometheus/procfs v0.12.0 // indirect
+	github.com/xhit/go-str2duration/v2 v2.1.0 // indirect
+	golang.org/x/sys v0.17.0 // indirect
+	google.golang.org/protobuf v1.32.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
