@@ -1,5 +1,5 @@
 // These are in fact integration tests. You will need a CO2 meter to run them ¯\_(ツ)_/¯
-package meter_test
+package meter
 
 import (
 	"testing"
