@@ -1,8 +1,8 @@
 module github.com/schjan/co2monitor
 
-go 1.22
+go 1.23
 
-toolchain go1.22.0
+toolchain go1.23.0
 
 require (
 	github.com/alecthomas/kingpin/v2 v2.4.0
