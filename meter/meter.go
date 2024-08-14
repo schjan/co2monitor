@@ -1,18 +1,15 @@
 package meter
 
 import (
-	"os"
-	"syscall"
-	"unsafe"
-
+	"crypto/rand"
+	"errors"
+	"fmt"
 	"log"
 	"math"
-
-	"crypto/rand"
-
+	"os"
 	"sync/atomic"
-
-	"github.com/pkg/errors"
+	"syscall"
+	"unsafe"
 )
 
 const (
@@ -43,7 +40,7 @@ func (m *Meter) Open(path string) (err error) {
 	m.file, err = os.OpenFile(path, os.O_RDWR, 0644)
 
 	if err != nil || m.file == nil {
-		return errors.Wrapf(err, "Failed to open '%v'", path)
+		return fmt.Errorf("failed to open '%v': %w", path, err)
 	}
 
 	log.Printf("Device '%v' opened", m.file.Name())
@@ -67,7 +64,7 @@ func (m *Meter) ioctl() error {
 	_, _, err := syscall.Syscall(syscall.SYS_IOCTL, m.file.Fd(), hidiocsfeature9, uintptr(unsafe.Pointer(&data)))
 
 	if err != 0 {
-		return errors.Wrap(syscall.Errno(err), "ioctl failed")
+		return fmt.Errorf("ioctl failed: %w", err)
 	}
 	return nil
 }
@@ -76,7 +73,7 @@ func (m *Meter) ioctl() error {
 // device file needs to be opened via Open.
 func (m *Meter) Read() (*Measurement, error) {
 	if atomic.LoadInt32(&m.opened) != 1 {
-		return nil, errors.New("Device needs to be opened")
+		return nil, errors.New("device needs to be opened")
 	}
 
 	result := make([]byte, 8)
@@ -85,7 +82,7 @@ func (m *Meter) Read() (*Measurement, error) {
 	for {
 		_, err := m.file.Read(result)
 		if err != nil {
-			return nil, errors.Wrapf(err, "Could not read from: '%v'", m.file.Name())
+			return nil, fmt.Errorf("could not read from '%s': %w", m.file.Name(), err)
 		}
 
 		decrypted := m.decrypt(result)
